@@ -61,4 +61,5 @@ test_image = image.load_img('dataset/test_set/', target_size=(64,64))
 test_image = image.img_to_array(test_image)
 test_image = np.expand_dims(test_image, axis=4)#input has to be in a batch
 results = classifier.predict(test_image)
-#training_set.class_indices
+print("Result:",results)
+print("Classification index:",training_set.class_indices)
