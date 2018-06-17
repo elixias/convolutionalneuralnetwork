@@ -12,6 +12,10 @@ classifier.add(Convolution2D(32,3,3, input_shape=(64,64,3),activation='relu'))#3
 #pooling / reducing the conv maps
 classifier.add(MaxPooling2D(pool_size=(2,2)))
 
+#adding more layers
+classifier.add(Convolution2D(32,3,3,activation='relu'))
+classifier.add(MaxPooling2D(pool_size=(2,2)))
+
 #flatten
 classifier.add(Flatten())
 
@@ -51,3 +55,10 @@ classifier.fit_generator(
         validation_data=test_set,
         validation_steps=2000)
 
+import numpy as np
+from keras.preprocessing import image
+test_image = image.load_img('dataset/test_set/', target_size=(64,64))
+test_image = image.img_to_array(test_image)
+test_image = np.expand_dims(test_image, axis=4)#input has to be in a batch
+results = classifier.predict(test_image)
+#training_set.class_indices
